@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:grab_it/screens/cart/cart_view.dart';
+import 'package:grab_it/screens/splash/splash_view.dart';
 import 'package:grab_it/screens/utils/globals.dart' as globals;
 import 'package:stacked/stacked.dart';
 
@@ -62,7 +63,8 @@ class _HomeViewState extends State<HomeView> {
                       if (model.cartModel.isNotEmpty) {
                         Navigator.of(context)
                             .push(MaterialPageRoute(
-                                builder: (context) => CartView(cartModel: model.cartModel)))
+                                builder: (context) =>
+                                    CartView(cartModel: model.cartModel)))
                             .then((completion) {
                           print('Order Place : ${globals.orderPlaced}');
                           if (globals.orderPlaced) {
@@ -70,10 +72,16 @@ class _HomeViewState extends State<HomeView> {
                             model.getItem();
                           }
                         });
+                      } else {
+                        final snackBar = const SnackBar(
+                          content: Text('No items in cart'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
                       child: badges.Badge(
                         badgeContent: Text(
                           model.cartCount.toString(),
@@ -108,24 +116,30 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   Icon(
                                     Icons.square,
-                                    color: cat.dishType == 1 ? Colors.red : Colors.green,
+                                    color: cat.dishType == 1
+                                        ? Colors.red
+                                        : Colors.green,
                                   ),
                                   const SizedBox(
                                     width: 10,
                                   ),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(cat.dishName ?? ''),
                                         const SizedBox(
                                           height: 5,
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text("INR ${(cat.dishPrice ?? 0) * 22}"),
-                                            Text("${(cat.dishCalories ?? 0)} Calories")
+                                            Text(
+                                                "INR ${(cat.dishPrice ?? 0) * 22}"),
+                                            Text(
+                                                "${(cat.dishCalories ?? 0)} Calories")
                                           ],
                                         ),
                                         const SizedBox(
@@ -139,18 +153,22 @@ class _HomeViewState extends State<HomeView> {
                                           width: 150,
                                           decoration: BoxDecoration(
                                             color: Colors.green,
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               cat.qty == 0
                                                   ? const SizedBox()
                                                   : IconButton(
                                                       onPressed: () {
                                                         cat.qty == 1
-                                                            ? model.removeCart(cat)
-                                                            : model.updateCart(cat, --cat.qty);
+                                                            ? model
+                                                                .removeCart(cat)
+                                                            : model.updateCart(
+                                                                cat, --cat.qty);
                                                       },
                                                       icon: const Icon(
                                                         Icons.remove,
@@ -158,13 +176,15 @@ class _HomeViewState extends State<HomeView> {
                                                       )),
                                               Text(
                                                 cat.qty.toString(),
-                                                style: const TextStyle(color: Colors.white),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
                                               ),
                                               IconButton(
                                                   onPressed: () {
                                                     cat.qty == 0
                                                         ? model.addToCart(cat)
-                                                        : model.updateCart(cat, ++cat.qty);
+                                                        : model.updateCart(
+                                                            cat, ++cat.qty);
                                                   },
                                                   icon: const Icon(
                                                     Icons.add,
@@ -179,7 +199,8 @@ class _HomeViewState extends State<HomeView> {
                                         cat.addonCat?.isNotEmpty ?? false
                                             ? const Text(
                                                 "Customization available",
-                                                style: TextStyle(color: Colors.redAccent),
+                                                style: TextStyle(
+                                                    color: Colors.redAccent),
                                               )
                                             : const SizedBox(),
                                       ],
@@ -194,8 +215,10 @@ class _HomeViewState extends State<HomeView> {
                                     child: Image.network(cat.dishImage ?? '',
                                         color: Colors.grey,
                                         width: 80,
-                                        height: 80, loadingBuilder: (BuildContext context,
-                                            Widget child, ImageChunkEvent? loadingProgress) {
+                                        height: 80,
+                                        loadingBuilder: (BuildContext context,
+                                            Widget child,
+                                            ImageChunkEvent? loadingProgress) {
                                       return const CircularProgressIndicator();
                                     }),
                                   )
@@ -223,22 +246,23 @@ class _HomeViewState extends State<HomeView> {
                       decoration: const BoxDecoration(
                           color: Colors.green,
                           borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
                             backgroundColor: Colors.brown.shade800,
-                            child: const Text('MN'),
+                            child: const Text('XX'),
                           ),
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text('Muhammed Naseem'),
+                          Text(globals.userMobile ?? ''),
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text('ID : 410'),
+                          Text('ID : ${globals.uid ?? ''}'),
                         ],
                       ),
                     ),
@@ -246,8 +270,11 @@ class _HomeViewState extends State<HomeView> {
                       leading: const Icon(Icons.logout),
                       title: const Text('Logout'),
                       onTap: () {
-                        // Update the state of the app.
-                        // ...
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SplashView()),
+                            (route) => false);
                       },
                     ),
                   ],

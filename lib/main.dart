@@ -7,18 +7,19 @@ import 'package:grab_it/screens/utils/globals.dart' as globals;
 Future<void> main() async {
   globals.orderPlaced = false;
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
 
-  await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: 'recaptcha-v3-site-key',
-    // Default provider for Android is the Play Integrity provider. You can use the "AndroidProvider" enum to choose
-    // your preferred provider. Choose from:
-    // 1. debug provider
-    // 2. safety net provider
-    // 3. play integrity provider
-    androidProvider: AndroidProvider.debug,
-  );
+  // await Firebase.initializeApp();
+  //
+  // await FirebaseAppCheck.instance.activate(
+  //   webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+  //   // Default provider for Android is the Play Integrity provider. You can use the "AndroidProvider" enum to choose
+  //   // your preferred provider. Choose from:
+  //   // 1. debug provider
+  //   // 2. safety net provider
+  //   // 3. play integrity provider
+  //   androidProvider: AndroidProvider.debug,
+  // );
   runApp(const MyApp());
 }
 

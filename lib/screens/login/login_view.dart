@@ -7,6 +7,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 // Package imports:
 import 'package:stacked/stacked.dart';
 
+import '../home/home_view.dart';
 import '../utils/shared.dart';
 import 'login_viewmodel.dart';
 
@@ -104,6 +105,21 @@ class LoginView extends StatelessWidget {
                     isBusy: model.busy(model.busyObject),
                   ),
                   SizedBox(height: 30),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeView()));
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
