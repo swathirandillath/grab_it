@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "658735490726",
+    "project_id": "grab-it-b2c98",
+    "storage_bucket": "grab-it-b2c98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658735490726:android:1db5e7a5833d87b004f667",
+        "android_client_info": {
+          "package_name": "com.example.grab_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658735490726-hgq6bgr98i4t1s1qn1o5ep3ieemm573b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACWyxKWLx3Uqk2MrrGC2CImSFbYCLe6Bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658735490726-hgq6bgr98i4t1s1qn1o5ep3ieemm573b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
