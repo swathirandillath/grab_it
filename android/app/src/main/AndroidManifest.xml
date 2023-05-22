@@ -2,7 +2,7 @@
     package="com.example.grab_it">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="grab_it"
+        android:label="Grab it!"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

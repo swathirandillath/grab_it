@@ -3,6 +3,7 @@ import 'package:grab_it/screens/splash/splash_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../login/login_view.dart';
+import '../utils/firebase_auth_service.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -35,8 +36,9 @@ class SplashView extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => const LoginView()));
+                  model.signInWithGoogle(context:context);
+
+
                 },
               ),
             ),

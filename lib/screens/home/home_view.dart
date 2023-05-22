@@ -39,7 +39,6 @@ class _HomeViewState extends State<HomeView> {
             model.tabController?.addListener(() {
               if (!(model.tabController?.indexIsChanging ?? false)) {
                 print('TAB INDEX: ${model.tabController?.index}');
-                // add code to be executed on TabBar change
                 //model.getCatDish(model.tabController?.index ?? 0);
               }
             });*/
@@ -73,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
                           }
                         });
                       } else {
-                        final snackBar = const SnackBar(
+                        const snackBar = SnackBar(
                           content: Text('No items in cart'),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -253,7 +252,11 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           CircleAvatar(
                             backgroundColor: Colors.brown.shade800,
-                            child: const Text('XX'),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: globals.displayName.isEmpty
+                                    ? const Text("XX")
+                                    : Image.network(globals.displayName)),
                           ),
                           const SizedBox(
                             height: 5,
@@ -270,6 +273,7 @@ class _HomeViewState extends State<HomeView> {
                       leading: const Icon(Icons.logout),
                       title: const Text('Logout'),
                       onTap: () {
+                        model.signOutGoogle();
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

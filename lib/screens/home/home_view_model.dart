@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../model/response.dart';
@@ -13,11 +15,15 @@ class HomeViewModel extends BaseViewModel {
 
   TabController? tabController;
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+
   List<CategoryDishes> cartModel = [];
 
   int cartCount = 0;
 
   getItem() async {
+
     categoryDish.clear();
     menuList.clear();
     cartModel.clear();
@@ -70,5 +76,9 @@ class HomeViewModel extends BaseViewModel {
       }
     }
     notifyListeners();
+  }
+  void signOutGoogle() async{
+    await _googleSignIn.signOut();
+    print("User Sign Out");
   }
 }
